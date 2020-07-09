@@ -1,4 +1,4 @@
-from linetypes import LineType
+from .line_types import LineType
 
 
 class QuizLine:
