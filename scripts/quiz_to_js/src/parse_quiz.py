@@ -1,7 +1,11 @@
-from .utils.file import open_file_for_read, close_file, compare_extension
-from .parsing.quiz_line import QuizLine
-from .parsing.line_types import LineType
+from utils.file import open_file_for_read, close_file, compare_extension
+from parsing.quiz_line import QuizLine
+from parsing.line_types import LineType
+from quiz.quiz import Quiz
+from quiz.question import Question
+from quiz.answer import Answer
 import sys
+# TODO: change back to relative path later
 
 
 def parse_line_to_quiz_line(line: str):
@@ -32,11 +36,49 @@ def parse_line_to_quiz_line(line: str):
     return QuizLine(line_type, text)
 
 
-def parse_file_as_quiz(filename: str):
+def parse_file_to_quiz(filename: str):
     """ Parse a quiz file (.quiz extension) and returns a Quiz object """
+    ret_value = 0
     if (not compare_extension(filename, '.quiz')
             and not compare_extension(filename, '.QUIZ')):
         print('Given file is not of .QUIZ extension: ', filename)
-        sys.exit(2)
+        ret_value = 2
+        return (ret_value, None)
+
     quiz_file = open_file_for_read(filename)
-    close_file(quizFile)
+    current_line = quiz_file.readline()
+
+    quiz: Quiz = None
+    current_question: Question = None
+    is_quiz_correct = True
+    index = 0
+
+    while (current_line != ""):
+        current_quiz_line = parse_line_to_quiz_line(current_line)
+        index += 1
+
+        if (current_quiz_line.line_type == LineType.INCORRECT_FORMAT):
+            print('Wrong format of line %d > %s' % (index, current_line))
+            is_quiz_correct = False
+            ret_value = 2
+        elif (is_quiz_correct):
+            if (current_quiz_line.line_type == LineType.NAME_OF_QUIZ):
+                quiz = Quiz(current_quiz_line.text)
+            elif (current_quiz_line.line_type == LineType.QUESTION):
+                current_question = Question(current_quiz_line.text)
+                quiz.add_question(current_question)
+            elif (current_quiz_line.line_type == LineType.CORRECT_ANSWER):
+                answer = Answer(True, current_quiz_line.text)
+                current_question.add_answer(answer)
+            elif (current_quiz_line.line_type == LineType.INCORRECT_ANSWER):
+                answer = Answer(False, current_quiz_line.text)
+                current_question.add_answer(answer)
+            elif (current_quiz_line.line_type == LineType.HELP):
+                question_help = current_quiz_line.text
+                current_question.add_help(question_help)
+
+        current_line = quiz_file.readline()
+
+    close_file(quiz_file)
+
+    return (ret_value, quiz)
