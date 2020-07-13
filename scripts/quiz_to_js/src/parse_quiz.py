@@ -1,11 +1,11 @@
-from utils.file import open_file_for_read, close_file, compare_extension
-from parsing.quiz_line import QuizLine
-from parsing.line_types import LineType
-from quiz.quiz import Quiz
-from quiz.question import Question
-from quiz.answer import Answer
+from .utils.file import open_file_for_read, close_file, compare_extension
+from .parsing.quiz_line import QuizLine
+from .parsing.line_types import LineType
+from .quiz.quiz import Quiz
+from .quiz.question import Question
+from .quiz.answer import Answer
 import sys
-# TODO: change back to relative path later
+# TODO: fix imports
 
 
 def parse_line_to_quiz_line(line: str):
