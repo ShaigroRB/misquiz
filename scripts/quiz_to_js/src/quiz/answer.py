@@ -5,3 +5,8 @@ class Answer:
         """ Create an answer marked as correct or incorrect given a name and a boolean """
         self.is_correct = is_correct
         self.answer = answer
+
+    def print(self, indentation: str = ""):
+        """ Print the content of this answer """
+        print_correct = "Correct answer" if self.is_correct else "Incorrect answer"
+        print("%s%s: %s" % (indentation, print_correct, self.answer))

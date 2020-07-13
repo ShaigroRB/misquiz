@@ -12,3 +12,11 @@ class Quiz:
     def add_question(self, question: Question):
         """ Add a question to the quiz' questions """
         self.questions.append(question)
+
+    def print(self, indentation: str = " "):
+        """ Print the content of the quiz """
+        print("Quiz:", self.name)
+        print("%sQuestions:" % indentation)
+        for question in self.questions:
+            print()
+            question.print(indentation * 2, indentation)
