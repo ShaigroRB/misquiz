@@ -20,3 +20,7 @@ class Quiz:
         for question in self.questions:
             print()
             question.print(indentation * 2, indentation)
+
+    def to_json(self):
+        """ Return the quiz in JSON format """
+        return dict(quiz=self.name, questions=self.questions)
