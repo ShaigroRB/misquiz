@@ -15,4 +15,4 @@ jobs:
           python-version: 3.7
 
       - name: Run unittest
-        run: python -m unittest discover scripts/
+        run: python -m unittest discover scripts/ -v
