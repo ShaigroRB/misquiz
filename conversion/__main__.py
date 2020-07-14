@@ -2,7 +2,6 @@ from conversion.quiz_to_js.src.parse_quiz import parse_file_to_quiz
 from conversion.quiz_to_js.src.generate_js import generate_js_file_for_quiz, generate_js_file_for_list_of_quizzes
 from conversion.quiz_to_js.src.utils.file import get_compatible_filename, compare_extension
 import sys
-from threading import Thread
 import os
 
 
@@ -10,6 +9,7 @@ def parse_quiz_and_generate_js(filename: str, compatible_filename: str):
     ret_value, quiz = parse_file_to_quiz(filename)
     if (ret_value == 0):
         generate_js_file_for_quiz(compatible_filename, quiz)
+    return ret_value
 
 
 def main(argv):
@@ -26,6 +26,7 @@ def main(argv):
     threads = []
     quizzes_names = []
 
+    # TODO: benchmark with threads
     # parse quizzes and generate js for each of them
     for filename in os.listdir(quizzes_folder):
         if (not compare_extension(filename, '.quiz')
@@ -34,20 +35,13 @@ def main(argv):
             continue
 
         compatible_filename = get_compatible_filename(filename, ".quiz")
-        quizzes_names.append(compatible_filename)
-
         fullpath_filename = quizzes_folder.rstrip('/') + '/' + filename
-        thread = Thread(target=parse_quiz_and_generate_js,
-                        args=(fullpath_filename, compatible_filename))
-        threads.append(thread)
-        thread.start()
+        ret_value = parse_quiz_and_generate_js(fullpath_filename, compatible_filename)
+        if (ret_value == 0):
+            quizzes_names.append(compatible_filename)
 
     # create file regrouping all quizzes
     generate_js_file_for_list_of_quizzes(quizzes_names)
-
-    # wait for all threads to finish
-    for thread in threads:
-        thread.join()
 
 
 if __name__ == '__main__':
