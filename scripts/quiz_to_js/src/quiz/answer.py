@@ -10,3 +10,7 @@ class Answer:
         """ Print the content of this answer """
         print_correct = "Correct answer" if self.is_correct else "Incorrect answer"
         print("%s%s: %s" % (indentation, print_correct, self.answer))
+
+    def to_json(self):
+        """ Return the answer in JSON format """
+        return dict(isCorrect=self.is_correct, answer=self.answer)

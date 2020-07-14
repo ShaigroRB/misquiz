@@ -30,3 +30,7 @@ class Question:
         else:
             print("%sHelp of this question: %s" %
                   ((indentation + orig_indentation), self.help))
+
+    def to_json(self):
+        """ Return the question in JSON format """
+        return dict(question=self.name, answers=self.answers, help=self.help)
