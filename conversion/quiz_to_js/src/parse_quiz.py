@@ -1,11 +1,10 @@
-from .utils.file import open_file_for_read, close_file, compare_extension
-from .parsing.quiz_line import QuizLine
-from .parsing.line_types import LineType
-from .quiz.quiz import Quiz
-from .quiz.question import Question
-from .quiz.answer import Answer
+from conversion.quiz_to_js.src.utils.file import compare_extension
+from conversion.quiz_to_js.src.parsing.quiz_line import QuizLine
+from conversion.quiz_to_js.src.parsing.line_types import LineType
+from conversion.quiz_to_js.src.quiz.quiz import Quiz
+from conversion.quiz_to_js.src.quiz.question import Question
+from conversion.quiz_to_js.src.quiz.answer import Answer
 import sys
-# TODO: fix imports
 
 
 def parse_line_to_quiz_line(line: str):
@@ -45,7 +44,7 @@ def parse_file_to_quiz(filename: str):
         ret_value = 2
         return (ret_value, None)
 
-    quiz_file = open_file_for_read(filename)
+    quiz_file = open(filename, 'r')
     current_line = quiz_file.readline()
 
     quiz: Quiz = None
@@ -79,6 +78,6 @@ def parse_file_to_quiz(filename: str):
 
         current_line = quiz_file.readline()
 
-    close_file(quiz_file)
+    quiz_file.close()
 
     return (ret_value, quiz)

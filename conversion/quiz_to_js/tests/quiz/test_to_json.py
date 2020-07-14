@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import Mock
-from quiz_to_js.src.quiz.quiz import Quiz
-from quiz_to_js.src.quiz.question import Question
-from quiz_to_js.src.quiz.answer import Answer
+from conversion.quiz_to_js.src.quiz.quiz import Quiz
+from conversion.quiz_to_js.src.quiz.question import Question
+from conversion.quiz_to_js.src.quiz.answer import Answer
 
 
 class TestToJson(unittest.TestCase):

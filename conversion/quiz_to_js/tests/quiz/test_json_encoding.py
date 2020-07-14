@@ -1,9 +1,9 @@
 import unittest
 import json
-from quiz_to_js.src.quiz.quiz import Quiz
-from quiz_to_js.src.quiz.question import Question
-from quiz_to_js.src.quiz.answer import Answer
-from quiz_to_js.src.utils.json_encoder import ComplexEncoder
+from conversion.quiz_to_js.src.quiz.quiz import Quiz
+from conversion.quiz_to_js.src.quiz.question import Question
+from conversion.quiz_to_js.src.quiz.answer import Answer
+from conversion.quiz_to_js.src.utils.json_encoder import ComplexEncoder
 
 
 class TestJsonEncoding(unittest.TestCase):

@@ -1,7 +1,7 @@
 import unittest
-from quiz_to_js.src.parse_quiz import parse_line_to_quiz_line
-from quiz_to_js.src.parsing.line_types import LineType
-from quiz_to_js.src.parsing.quiz_line import QuizLine
+from conversion.quiz_to_js.src.parse_quiz import parse_line_to_quiz_line
+from conversion.quiz_to_js.src.parsing.line_types import LineType
+from conversion.quiz_to_js.src.parsing.quiz_line import QuizLine
 
 
 class TestParseLineToQuizLine(unittest.TestCase):
