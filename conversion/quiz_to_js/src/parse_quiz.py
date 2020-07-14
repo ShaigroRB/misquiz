@@ -50,7 +50,7 @@ def parse_file_to_quiz(filename: str):
         index += 1
 
         if (current_quiz_line.line_type == LineType.INCORRECT_FORMAT):
-            print('⚠️ - Wrong format of line %d > %s' % (index, current_line))
+            print('⚠️ - Wrong format of %s: line %d: %s' % (filename, index, current_line))
             is_quiz_correct = False
             ret_value = 2
         elif (is_quiz_correct):
