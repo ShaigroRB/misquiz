@@ -5,5 +5,5 @@ def compare_extension(filename: str, expected_extension: str):
 
 def get_compatible_filename(filename: str, extension: str):
     """ Get the filename as a non-problematic string (replace ' ' by '_', ...). Removes the extension. """
-    no_ext = str(filename).lower().rstrip(extension)
+    no_ext = str(filename).lower().rstrip(extension.lower())
     return (no_ext).replace(" ", "_").replace("-", "_").replace(".", "_")

@@ -1,4 +1,3 @@
-from conversion.quiz_to_js.src.utils.file import compare_extension
 from conversion.quiz_to_js.src.parsing.quiz_line import QuizLine
 from conversion.quiz_to_js.src.parsing.line_types import LineType
 from conversion.quiz_to_js.src.quiz.quiz import Quiz
@@ -38,12 +37,6 @@ def parse_line_to_quiz_line(line: str):
 def parse_file_to_quiz(filename: str):
     """ Parse a quiz file (.quiz extension) and returns a Quiz object """
     ret_value = 0
-    if (not compare_extension(filename, '.quiz')
-            and not compare_extension(filename, '.QUIZ')):
-        print('Given file is not of .QUIZ extension: ', filename)
-        ret_value = 2
-        return (ret_value, None)
-
     quiz_file = open(filename, 'r')
     current_line = quiz_file.readline()
 
@@ -57,7 +50,7 @@ def parse_file_to_quiz(filename: str):
         index += 1
 
         if (current_quiz_line.line_type == LineType.INCORRECT_FORMAT):
-            print('Wrong format of line %d > %s' % (index, current_line))
+            print('⚠️ - Wrong format of line %d > %s' % (index, current_line))
             is_quiz_correct = False
             ret_value = 2
         elif (is_quiz_correct):

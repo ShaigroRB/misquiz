@@ -1,8 +1,6 @@
 import unittest
 from conversion.quiz_to_js.src.parse_quiz import parse_line_to_quiz_line
 from conversion.quiz_to_js.src.parsing.line_types import LineType
-from conversion.quiz_to_js.src.parsing.quiz_line import QuizLine
-
 
 class TestParseLineToQuizLine(unittest.TestCase):
     """ Test class for testing parsing line to quiz line """
